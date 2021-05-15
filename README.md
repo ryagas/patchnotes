@@ -1,11 +1,14 @@
 # Patchnotes
 
+⚠️ WORK IN PROGRESS ⚠️
+
 ## DEV STEPS
 
-[x] Create git repo
-[x] Add .gitignore
-[x] init our npm project
-[] install deps + prep configs
+- [x] Create git repo
+- [x] Add .gitignore
+- [x] init our npm project
+- [x] Add linter
+- [ ] Make it pretty
 
 ## Goals
 
