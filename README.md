@@ -8,7 +8,7 @@
 - [x] Add .gitignore
 - [x] init our npm project
 - [x] Add linter
-- [ ] Make it pretty
+- [x] Make it pretty
 
 ## Goals
 
