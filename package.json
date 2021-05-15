@@ -1,0 +1,19 @@
+{
+  "name": "@ryagas/patchnotes",
+  "version": "0.0.1",
+  "description": "Automagically converts git logs into user-friendly patch notes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 1",
+    "preversion": "exit 1"
+  },
+  "keywords": [
+    "git",
+    "patchnotes",
+    "changelogs",
+    "changelog",
+    "patchnote"
+  ],
+  "author": "Ryan Campbell (@ryagas)",
+  "license": "MIT"
+}
