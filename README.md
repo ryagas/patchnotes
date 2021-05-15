@@ -4,11 +4,29 @@
 
 ## DEV STEPS
 
+### Dev Env Setup
+
 - [x] Create git repo
 - [x] Add .gitignore
 - [x] init our npm project
 - [x] Add linter
 - [x] Make it pretty
+
+### Features
+
+- Ability to parse a string that is in the target changelog source format, and convert it into a useful data structure.
+
+## Commit Message Types
+
+- fix/bugfix
+- feat/features
+- build
+- ci
+- docs
+- style
+- refactor
+- perf/performance
+- test
 
 ## Goals
 
