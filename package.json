@@ -2,7 +2,8 @@
   "name": "@ryagas/patchnotes",
   "version": "0.0.1",
   "description": "Automagically converts git logs into user-friendly patch notes.",
-  "main": "index.js",
+  "main": "build/index.js",
+  "type": "module",
   "scripts": {
     "test": "exit 1",
     "preversion": "exit 1"
@@ -15,5 +16,9 @@
     "patchnote"
   ],
   "author": "Ryan Campbell (@ryagas)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^15.3.0",
+    "typescript": "^4.2.4"
+  }
 }
