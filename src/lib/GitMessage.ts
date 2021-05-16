@@ -1,15 +1,33 @@
+import { wrapIfNotArray } from '@bscotch/utility';
+
 interface ParsedLog {
   type: string;
   startPosition: number;
   descriptionStartPosition: number;
-  content?: string;
+  content: string;
   endPosition?: number;
-  tag?: string;
+  tags: string[];
   scope?: string;
 }
 
+export class Patchnote {
+  constructor(private parsedLog: ParsedLog) {
+    //
+  }
+
+  get title() {
+    return this.parsedLog.content.split(/\n/)[0];
+  }
+
+  toJSON() {
+    return {
+      title: this.title,
+    };
+  }
+}
+
 /**
- * The Message class takes a full Git message in its
+ * The GitMessage class takes a full Git message in its
  * constructor and parses it into a Patchnotes-compatible
  * data structure.
  */
@@ -28,11 +46,20 @@ export class GitMessage {
       if (!formatMatch) {
         break;
       }
-      const messageParts = formatMatch.groups as unknown as ParsedLog;
-      messageParts.descriptionStartPosition = conventionalFormatRegex.lastIndex;
-      messageParts.startPosition =
-        messageParts.descriptionStartPosition - formatMatch[0].length;
-      parsedLogs.push(messageParts);
+      const messageParts = formatMatch.groups as unknown as {
+        type: string;
+        tag?: string;
+        startPosition: number;
+      };
+      const log: ParsedLog = {
+        ...messageParts,
+        descriptionStartPosition: conventionalFormatRegex.lastIndex,
+        startPosition:
+          conventionalFormatRegex.lastIndex - formatMatch[0].length,
+        tags: wrapIfNotArray(messageParts.tag),
+        content: '',
+      };
+      parsedLogs.push(log);
     }
 
     // For each message, find the body and finish parsing
@@ -47,8 +74,13 @@ export class GitMessage {
         log.descriptionStartPosition,
         log.endPosition
       );
+      // Identify the title line and body, and then remove extraneous newlines.
+      const extraneousNewlineRegex = /(?<!\n)\n(?!\n)/g;
+      log.content = log.content
+        .replace(/\r/g, '')
+        .replace(extraneousNewlineRegex, ' ');
     }
 
-    return parsedLogs;
+    return parsedLogs.map(log => new Patchnote(log));
   }
 }

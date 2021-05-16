@@ -1,5 +1,6 @@
 import { undent } from '@bscotch/utility';
-import { GitMessage } from '../lib/Message.js';
+import { assert } from '../lib/errors.js';
+import { GitMessage } from '../lib/GitMessage.js';
 
 describe('Commit message parser', function () {
   const sampleMessage = undent`
@@ -19,7 +20,7 @@ describe('Commit message parser', function () {
     fix(pub|Dev): Fixed something that was broken.
     I have a second line on this message.
 
-    And her is the fix's body. It
+    And here is the fix's body.
     Here is a footer with some keywords in it:
     Closes #55. Thanks to @ryagas. BREAKING.
 
@@ -29,6 +30,7 @@ describe('Commit message parser', function () {
 
   it('can parse a complex message.', function () {
     const parsed = GitMessage.parse(sampleMessage);
-    console.log(parsed);
+    console.log(JSON.stringify(parsed, null, 2));
+    assert(false);
   });
 });
